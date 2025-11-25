@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-GH_REPO="https://github.com/dunglas/frankenphp"
+GH_REPO="https://github.com/php/frankenphp"
 TOOL_NAME="frankenphp"
 TOOL_TEST="frankenphp php-cli -v"
 
@@ -36,6 +36,10 @@ download_release() {
 	local version filename url system arch
 	version="$1"
 	filename="$2"
+
+	if [[ "$version" == "latest" ]]; then
+		version="$(${plugin_dir}/bin/latest-stable)"
+	fi
 
 	if [[ $OSTYPE == 'darwin'* ]]; then
 		system="mac"
